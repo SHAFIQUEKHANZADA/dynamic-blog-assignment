@@ -13,10 +13,10 @@ const Footer = () => {
         <div>
         <footer className="footer text-base-content sm:p-10 p-4 bg-white dark:bg-black dark:text-white">
             <aside className='flex flex-col justify-between'>
-                <div className={`${dosis.className} sm:text-[24px] text-[18px] sm:mb-10 mb-4`}>
+                <div className={`${dosis.className} sm:text-[24px] text-[18px] sm:mb-16 mb-4`}>
                     <span className={`${dance_font.className} bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
                 </div>
-                <p>
+                <p className={`${heebo.className}`}>
                     Blog Sphere
                     <br />
                     Providing reliable tech since 1992

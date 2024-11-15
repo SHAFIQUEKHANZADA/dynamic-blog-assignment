@@ -60,12 +60,12 @@ const Navbar = () => {
                     <DropdownMenu>
                         <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
-                            <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
-                            <Link href={"/geopolitics"}><DropdownMenuItem>Geo politics</DropdownMenuItem></Link>
-                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
-                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
-                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem className='text-[20px]'>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/sports"}><DropdownMenuItem className='text-[20px]'>Sports</DropdownMenuItem></Link>
+                            <Link href={"/geopolitics"}><DropdownMenuItem className='text-[20px]'>Geo politics</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem className='text-[20px]'>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem className='text-[20px]'>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem className='text-[20px]'>Generative AI</DropdownMenuItem></Link>
                         </DropdownMenuContent>
                     </DropdownMenu>
 
