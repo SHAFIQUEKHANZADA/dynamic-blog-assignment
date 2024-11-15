@@ -3,8 +3,21 @@ import React, { useState } from 'react';
 import { ModeToggle } from './toggleMode';
 import { Dancing_Script, Dosis } from 'next/font/google';
 import Link from 'next/link';
+import { Heebo } from 'next/font/google';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { IoIosArrowDown } from 'react-icons/io';
+
+
 
 const dance_font = Dancing_Script({ subsets: ['latin'] });
+const heebo = Heebo({ subsets: ['latin'] });
 const dosis = Dosis({ subsets: ['latin'] });
 
 const Navbar = () => {
@@ -32,10 +45,10 @@ const Navbar = () => {
     return (
         <div className="flex justify-between sm:px-6 px-2 py-3 items-center border-b-2">
             <div className={`${dosis.className} text-[24px]`}>
-                <span className={`${dance_font.className} bg-black text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
+                <span className={`${dance_font.className} bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
             </div>
 
-            <div className="flex items-center sm:space-x-5 space-x-2">
+            <div className={`${heebo.className} sm:text-[18px] flex items-center sm:space-x-5`}>
                 {items.map((item, i) => (
                     <li key={i} className="list-none hidden sm:flex">
                         <Link href={item.link}>
@@ -43,6 +56,22 @@ const Navbar = () => {
                         </Link>
                     </li>
                 ))}
+                <div className='sm:flex hidden'>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
+                            <Link href={"/geopolitics"}><DropdownMenuItem>Geo politics</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                            <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+
+                </div>
+
 
                 <button
                     className="sm:hidden text-black dark:text-white focus:outline-none"
@@ -96,6 +125,20 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         ))}
+                        <div className='sm:hidden block'>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                                    <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
+                                    <Link href={"/geopolitics"}><DropdownMenuItem>Geo politics</DropdownMenuItem></Link>
+                                    <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                                    <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                                    <Link href={"/genertiveai"}><DropdownMenuItem>Generative AI</DropdownMenuItem></Link>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+
                     </ul>
                 </div>
             )}
