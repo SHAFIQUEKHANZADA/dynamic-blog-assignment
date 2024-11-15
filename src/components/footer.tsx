@@ -13,7 +13,7 @@ const Footer = () => {
         <div>
         <footer className="footer text-base-content sm:p-10 p-4 bg-white dark:bg-black dark:text-white">
             <aside className='flex flex-col justify-between'>
-                <div className={`${dosis.className} text-[24px] sm:mb-10 mb-4`}>
+                <div className={`${dosis.className} sm:text-[24px] text-[18px] sm:mb-10 mb-4`}>
                     <span className={`${dance_font.className} bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
                 </div>
                 <p>
@@ -66,7 +66,7 @@ const Footer = () => {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent mb-8 h-[1px] w-full">
         {/* <hr className=""/> */}
-        <p className="px-10 text-center py-6 font-extralight text-[12px] dark:text-zinc-200 dark:bg-black">
+        <p className={`${heebo.className} px-10 text-center py-6 font-normal text-[12px] dark:text-zinc-200 dark:bg-black`}>
           © 2024 Blog Sphere™. All Rights Reserved.
         </p>
       </div>

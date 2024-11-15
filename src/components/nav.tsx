@@ -44,7 +44,7 @@ const Navbar = () => {
 
     return (
         <div className="flex justify-between sm:px-6 px-2 py-3 items-center border-b-2">
-            <div className={`${dosis.className} text-[24px]`}>
+            <div className={`${dosis.className} sm:text-[24px] text-[18px]`}>
                 <span className={`${dance_font.className} bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
             </div>
 
@@ -97,10 +97,10 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="fixed top-0 left-0 h-full w-[65%] sm:w-[60%] bg-zinc-900 dark:bg-zinc-600 text-white shadow-lg transition-transform transform translate-x-0 z-50">
+                <div className="fixed top-0 left-0 h-full w-[65%] sm:w-[60%] bg-white dark:bg-black dark:text-white text-black shadow-lg transition-transform transform translate-x-0 z-50">
                     <div className="flex justify-between items-center p-4 pt-5 border-b border-gray-700">
                         <span className="text-lg font-bold">Menu</span>
-                        <button onClick={toggleMenu} className="focus:outline-none text-white">
+                        <button onClick={toggleMenu} className="focus:outline-none dark:text-white text-black">
                             <svg
                                 className="w-6 h-6"
                                 fill="none"
@@ -121,7 +121,7 @@ const Navbar = () => {
                         {items.map((item, i) => (
                             <li key={i} className="list-none">
                                 <Link href={item.link}>
-                                    <span className="block text-white hover:text-gray-400">{item.name}</span>
+                                    <span className="block dark:text-white text-black hover:text-gray-400">{item.name}</span>
                                 </Link>
                             </li>
                         ))}
