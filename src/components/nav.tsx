@@ -57,7 +57,7 @@ const Navbar = () => {
                 <div className='sm:flex hidden'>
                     <DropdownMenu>
                         <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
-                        <DropdownMenuContent>
+                        <DropdownMenuContent className='p-4 mr-3 mt-[14px] rounded-sm'>
                             <Link href={"/technology-and-innovation"}><DropdownMenuItem className='text-[20px]'>Technology and Innovation</DropdownMenuItem></Link>
                             <Link href={"/sports"}><DropdownMenuItem className='text-[20px]'>Sports</DropdownMenuItem></Link>
                             <Link href={"/business"}><DropdownMenuItem className='text-[20px]'>Business</DropdownMenuItem></Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="fixed top-0 left-0 h-full w-[65%] sm:w-[60%] bg-white dark:bg-black dark:text-white text-black shadow-lg transition-transform transform translate-x-0 z-50">
+                <div className={`${heebo.className} fixed top-0 left-0 h-full w-[65%] sm:w-[60%] bg-white dark:bg-neutral-950 dark:text-white text-black shadow-lg transition-transform transform translate-x-0 z-50`}>
                     <div className="flex justify-between items-center p-4 pt-5 border-b border-gray-700">
                         <span className="text-lg font-bold">Menu</span>
                         <button onClick={toggleMenu} className="focus:outline-none dark:text-white text-black">
@@ -126,7 +126,7 @@ const Navbar = () => {
                         <div className='sm:hidden block'>
                             <DropdownMenu>
                                 <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className='border-none shadow-none'>
                                     <Link href={"/technology-and-innovation"}><DropdownMenuItem>Technology and Innovation</DropdownMenuItem></Link>
                                     <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
                                     <Link href={"/business"}><DropdownMenuItem>Business</DropdownMenuItem></Link>

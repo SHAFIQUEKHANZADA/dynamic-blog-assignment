@@ -1,8 +1,11 @@
+import BusinessPage from "@/components/Hero";
+
+ 
 
 export default function Home() {
   return (
    <div>
-    <h1>hello</h1>
+ <BusinessPage/>
    </div>
   );
 }
