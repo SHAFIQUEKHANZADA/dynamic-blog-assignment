@@ -77,3 +77,18 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Add the animation for infinite scrolling */
+@keyframes scrollUp {
+  0% {
+      transform: translateY(100%);
+  }
+  100% {
+      transform: translateY(-100%);
+  }
+}
+
+.animate-scrollUp {
+  animation: scrollUp 10s linear infinite;
+}

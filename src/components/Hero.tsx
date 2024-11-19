@@ -1,166 +1,182 @@
 "use client"
-import client, { urlFor } from '../../sanityClient';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heebo } from 'next/font/google';
-import { useEffect, useState } from 'react';
+import client, { urlFor } from '../../sanityClient';
 
 const heebo = Heebo({ subsets: ['latin'] });
 
-export default async function BusinessPage() {
-    // Fetch the most recently published article
-    const query = `*[_type == "business"] | order(publishedDate desc)[0] {
-    title,
-    overview,
-    slug,
-    mainImage {
-      asset,
-      alt
-    },
-    category,
-    authorName,
-    publishedDate,
-    readTime,
-  }`;
-    // Fetch the most recently published article
-    const query2 = `*[_type == "technology-and-innovation"] | order(publishedDate desc)[0] {
-    title,
-    overview,
-    slug,
-    mainImage {
-      asset,
-      alt
-    },
-    category,
-    authorName,
-    publishedDate,
-    readTime,
-  }`;
-    // Fetch the most recently published article
-    const query3 = `*[_type == "news-and-currentaffairs"] | order(publishedDate desc)[0] {
-    title,
-    overview,
-    slug,
-    mainImage {
-      asset,
-      alt
-    },
-    category,
-    authorName,
-    publishedDate,
-    readTime,
-  }`;
+// Define the Article type
+interface Article {
+  title: string;
+  overview: string;
+  slug: {
+    current: string;
+  };
+  mainImage: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  category: string;
+  authorName: string;
+  authorImage: {
+    asset: {
+      _id: string;
+    };
+  };
+  publishedDate: string;
+  readTime: string;
+}
 
-    // Fetch the most recent article
-    const article = await client.fetch(query);
-    const articleTwo = await client.fetch(query2);
-    const articleThree = await client.fetch(query3);
+export default function HeroSection() {
+    // Define the type of `articles` explicitly
+    const [articles, setArticles] = useState<Article[]>([]);  // <- Add type here
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Check if an article was found
-    if (!article) {
-        return <p className="text-center text-gray-500">No recent articles found.</p>;
-    }
-    // Check if an article was found
-    if (!articleTwo) {
-        return <p className="text-center text-gray-500">No recent articles found.</p>;
-    }
-    // Check if an article was found
-    if (!articleThree) {
-        return <p className="text-center text-gray-500">No recent articles found.</p>;
+    useEffect(() => {
+        const fetchArticles = async () => {
+            const queries = [
+                `*[_type == "technology-and-innovation"] | order(publishedDate desc)[0] {
+                  title,
+                  overview,
+                  slug,
+                  mainImage {
+                    asset,
+                    alt
+                  },
+                  category,
+                  authorName,
+                  authorImage {
+                    asset {
+                      _id
+                    }
+                  },
+                  publishedDate,
+                  readTime,
+                }`,
+                `*[_type == "business"] | order(publishedDate desc)[0] {
+                  title,
+                  overview,
+                  slug,
+                  mainImage {
+                    asset,
+                    alt
+                  },
+                  category,
+                  authorName,
+                  authorImage {
+                    asset {
+                      _id
+                    }
+                  },
+                  publishedDate,
+                  readTime,
+                }`,
+                `*[_type == "news-and-currentaffairs"] | order(publishedDate desc)[0] {
+                  title,
+                  overview,
+                  slug,
+                  mainImage {
+                    asset,
+                    alt
+                  },
+                  category,
+                  authorName,
+                  authorImage {
+                    asset {
+                      _id
+                    }
+                  },
+                  publishedDate,
+                  readTime,
+                }`,
+            ];
+
+            const results = await Promise.all(queries.map((query) => client.fetch(query)));
+            setArticles(results);
+        };
+
+        fetchArticles();
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % articles.length);
+        }, 6000);
+
+        return () => clearInterval(interval);
+    }, [articles]);
+
+    if (articles.length === 0) {
+        return <p className="text-center text-gray-500">Loading articles...</p>;
     }
 
     return (
-        <section className={`${heebo.className} text-gray-600 body-font px-10`}>
-            <div className='grid grid-cols-3 space-x-2 space-y-2'>
-                {/* 1 */}
-                <div className="container mx-auto col-span-2 row-span-2 mt-2">
-                    <Link href={`/technology-and-innovation/${articleTwo.slug.current}`} passHref>
-                        <div className="relative group h-full rounded-lg overflow-hidden shadow-lg">
-                            {articleTwo.mainImage?.asset && (
-                                <Image
-                                    src={urlFor(articleTwo.mainImage).url()}
-                                    alt={articleTwo.mainImage.alt || 'Main image'}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="group-hover:scale-110 transition-transform duration-300"
-                                />
-                            )}
-                            <div className="absolute inset-0 bg-black bg-opacity-40 p-4 flex flex-col justify-end">
-                                <p className='text-black font-bold bg-yellow-500 bg-opacity-70 w-fit p-1  px-2'>Technology and Innovation</p>
-                                <p className="text-sm text-gray-300 mb-1">{articleTwo.category}</p>
-                                <h2 className="text-white text-6xl font-bold mb-2">{articleTwo.title}</h2>
-                                <div className="flex items-center text-gray-300 text-sm">
-                                   <Image src={"/sa.png"} alt='as' width={100} height={100} className='rounded-full w-10 h-10 mr-2'/>
-                                    <span>{articleTwo.authorName}</span>
-                                    <span className="ml-2">| {articleTwo.publishedDate}</span>
-                                    {articleTwo.readTime && (
-                                        <span className="ml-2">| {articleTwo.readTime} min read</span>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
+        <section className={`${heebo.className} relative w-full h-[90vh] overflow-hidden`}>
+            <div className="relative w-full h-full flex overflow-hidden">
+                {articles.map((article, index) => (
+                    <div
+                        key={index}
+                        className={`absolute w-full h-full transition-transform duration-700 ease-in-out ${
+                            index === currentIndex
+                                ? 'translate-x-0 opacity-100'
+                                : index > currentIndex
+                                ? 'translate-x-full opacity-0'
+                                : '-translate-x-full opacity-0'
+                        }`}
+                        style={{ zIndex: index === currentIndex ? 1 : 0 }}
+                    >
+                        <Image
+                            src={urlFor(article.mainImage).url()}
+                            alt={article.mainImage.alt || 'Main image'}
+                            layout="fill"
+                            objectFit="cover"
+                            className="w-full h-full"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-40" />
 
-                {/* 2 */}
-                <div className="container mx-auto">
-                    <Link href={`/business/${article.slug.current}`} passHref>
-                        <div className="relative group h-[300px] rounded-lg overflow-hidden shadow-lg">
-                            {article.mainImage?.asset && (
-                                <Image
-                                    src={urlFor(article.mainImage).url()}
-                                    alt={article.mainImage.alt || 'Main image'}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="group-hover:scale-110 transition-transform duration-300"
-                                />
-                            )}
-                            <div className="absolute inset-0 bg-black bg-opacity-40 p-4 flex flex-col justify-end">
-                            <p className='text-white font-bold bg-blue-500 bg-opacity-70 w-fit p-1   px-2'>Business</p>
-                                <p className="text-sm text-gray-300 mb-1">{article.category}</p>
-                                <h2 className="text-white text-2xl font-bold mb-2">{article.title}</h2>
-                                <div className="flex items-center text-gray-300 text-sm">
-                                <Image src={"/sa.png"} alt='as' width={100} height={100} className='rounded-full w-8 h-8 mr-2'/>
-                                    <span>{article.authorName}</span>
-                                    <span className="ml-2">| {article.publishedDate}</span>
-                                    {article.readTime && (
-                                        <span className="ml-2">| {article.readTime} min read</span>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
+                        {/* Author Information - Bottom Left */}
+                        <div className="absolute bottom-8 left-4 text-white flex flex-col gap-5">
+                            <h3 className="text-5xl font-bold">{article.title}</h3>
 
-                {/* 3 */}
-                <div className="container mx-auto">
-                    <Link href={`/news-and-currentaffairs/${articleThree.slug.current}`} passHref>
-                        <div className="relative group h-[300px] rounded-lg overflow-hidden shadow-lg">
-                            {articleThree.mainImage?.asset && (
-                                <Image
-                                    src={urlFor(articleThree.mainImage).url()}
-                                    alt={articleThree.mainImage.alt || 'Main image'}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    className="group-hover:scale-110 transition-transform duration-300"
-                                />
-                            )}
-                            <div className="absolute inset-0 bg-black bg-opacity-40 p-4 flex flex-col justify-end">
-                            <p className='text-white font-bold bg-blue-500 bg-opacity-70 w-fit p-1  px-2'>News and Current Affairs</p>
-                                <p className="text-sm text-gray-300 mb-1">{articleThree.category}</p>
-                                <h2 className="text-white text-2xl font-bold mb-2">{articleThree.title}</h2>
-                                <div className="flex items-center text-gray-300 text-sm">
-                                <Image src={"/sa.png"} alt='as' width={100} height={100} className='rounded-full w-8 h-8 mr-2'/>
-                                    <span>{articleThree.authorName}</span>
-                                    <span className="ml-2">| {articleThree.publishedDate}</span>
-                                    {articleThree.readTime && (
-                                        <span className="ml-2">| {articleThree.readTime} min read</span>
-                                    )}
+                            {/* Overview Text - Infinite Scroll Effect */}
+                            <div className="h-24 overflow-hidden relative">
+                                <div className="animate-scrollUp absolute inset-0 w-[70%]">
+                                    <p className="text-2xl text-gray-300">{article.overview}</p>
                                 </div>
                             </div>
+
+                            <div className="flex space-x-40 items-center">
+                                <div className="flex items-center mt-2 space-x-2">
+                                    <Image
+                                        src={article.authorImage?.asset?._id ? urlFor(article.authorImage).url() : '/sa.png'}
+                                        alt={article.authorName || 'Author Image'}
+                                        width={40}
+                                        height={40}
+                                        className="rounded-full"
+                                    />
+                                    <div className="text-sm">
+                                        <p>{article.authorName}</p>
+                                        <div className="flex gap-2">
+                                            <p>{article.publishedDate}</p>
+                                            |
+                                            <p>{article.readTime} min read</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <Link href={`/${article.category}/${article.slug.current}`} passHref>
+                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Read More
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
-                    </Link>
-                </div>
+                    </div>
+                ))}
             </div>
         </section>
     );

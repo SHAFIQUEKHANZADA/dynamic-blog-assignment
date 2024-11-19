@@ -128,6 +128,5 @@ export default async function BusinessPage() {
         </div>
       </div>
     </section>
-
   );
 }

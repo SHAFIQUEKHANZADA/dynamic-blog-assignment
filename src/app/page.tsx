@@ -1,11 +1,13 @@
+import Featured from "@/components/feature";
 import BusinessPage from "@/components/Hero";
 
- 
+
 
 export default function Home() {
   return (
-   <div>
- <BusinessPage/>
-   </div>
+    <div>
+      <BusinessPage />
+      <Featured />
+    </div>
   );
 }

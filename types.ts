@@ -1,4 +1,3 @@
-// 1: business
 export interface Business {
   title: string;
   overview: string;
@@ -32,6 +31,11 @@ export interface Business {
   };
   readTime?: number;
   publishedDate?: string;
+
+  category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
 
 // 2: Food and drink
@@ -68,6 +72,11 @@ export interface FoodandDrink {
   };
   readTime?: number;
   publishedDate?: string;
+
+    category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
 
 
@@ -105,6 +114,11 @@ export interface HealthndFitness {
   };
   readTime?: number;
   publishedDate?: string;
+
+    category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
 
 // 4:News and Current Affairs
@@ -141,6 +155,11 @@ export interface NewsandCurrentAffairs {
   };
   readTime?: number;
   publishedDate?: string;
+
+    category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
 
 // 5: sports
@@ -177,6 +196,11 @@ export interface Sports {
   };
   readTime?: number;
   publishedDate?: string;
+
+    category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
 
 //6: Technology and Innovation
@@ -213,4 +237,9 @@ export interface TechandInnovation {
   };
   readTime?: number;
   publishedDate?: string;
+
+    category?: {
+    _ref: string;  
+    _type: 'reference'; 
+  };
 }
