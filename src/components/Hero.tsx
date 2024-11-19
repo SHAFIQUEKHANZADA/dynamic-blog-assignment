@@ -115,7 +115,7 @@ export default function HeroSection() {
     }
 
     return (
-        <section className={`${heebo.className} relative w-full h-[90vh] overflow-hidden`}>
+        <section className={`${heebo.className} relative w-full h-[60vh] sm:h-[90vh] overflow-hidden`}>
             <div className="relative w-full h-full flex overflow-hidden">
                 {articles.map((article, index) => (
                     <div
@@ -144,12 +144,12 @@ export default function HeroSection() {
 
                             {/* Overview Text - Infinite Scroll Effect */}
                             <div className="h-24 overflow-hidden relative">
-                                <div className="animate-scrollUp absolute inset-0 w-[70%]">
+                                <div className="animate-scrollUp absolute inset-0 sm:w-[70%] w-[100%]">
                                     <p className="text-2xl text-gray-300">{article.overview}</p>
                                 </div>
                             </div>
 
-                            <div className="flex space-x-40 items-center">
+                            <div className="flex sm:space-x-40 sm:px-0 px-2 justify-between items-end  sm:items-center">
                                 <div className="flex items-center mt-2 space-x-2">
                                     <Image
                                         src={article.authorImage?.asset?._id ? urlFor(article.authorImage).url() : '/sa.png'}
@@ -169,7 +169,7 @@ export default function HeroSection() {
                                 </div>
 
                                 <Link href={`/${article.category}/${article.slug.current}`} passHref>
-                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <button className="bg-transparent border dark:border-white hover:bg-transparent/45 duration-300 hover:scale-105 text-[12px] text-white font-bold py-2 px-4 rounded">
                                         Read More
                                     </button>
                                 </Link>

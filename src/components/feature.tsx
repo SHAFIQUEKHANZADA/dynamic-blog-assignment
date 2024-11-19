@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Heebo } from 'next/font/google';
+import Trending from './Trending';
 
 const heebo = Heebo({ subsets: ['latin'] });
 
@@ -26,7 +27,7 @@ export default function BusinessPage() {
             setLoading(true);
 
             const categoryFilter =
-               `[_type == "${selectedCategory}"]`;
+                `[_type == "${selectedCategory}"]`;
             const query = `*${categoryFilter} | order(publishedDate desc)[0...3] {
         title,
         overview,
@@ -50,24 +51,42 @@ export default function BusinessPage() {
     }, [selectedCategory]);
 
     return (
-        <div className={`${heebo.className} text-gray-600  dark:text-gray-400 body-font px-8 my-20`}>
+        <div className={`${heebo.className} text-gray-600  dark:text-gray-400 body-font sm:px-8 px-2 my-20`}>
             <h1 className='text-5xl font-bold'>Featured Post</h1>
-            <div className='flex gap-4'>
-                <section className=' w-[70%]'>
-                    <div className="flex justify-between mt-10 mb-5">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat.value}
-                                onClick={() => setSelectedCategory(cat.value)}
-                                className={`px-2 py-2 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
+            <div className='flex sm:flex-row flex-col gap-4'>
+                <section className='sm:w-[70%] w-[100%]'>
+                    <div className="flex justify-between mt-10 mb-5 flex-wrap sm:flex-nowrap">
+                        {/* Category Buttons (visible on medium and above) */}
+                        <div className="hidden sm:flex space-x-4">
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat.value}
+                                    onClick={() => setSelectedCategory(cat.value)}
+                                    className={`px-2 py-2 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
+                                >
+                                    {cat.label}
+                                    <span
+                                        className={`absolute bottom-0 left-0 w-full h-[6px] bg-yellow-500 transform ${selectedCategory === cat.value ? 'scale-x-100' : 'scale-x-0'
+                                            } transition-transform duration-300`}
+                                    />
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Select Dropdown (visible on small screens) */}
+                        <div className="sm:hidden w-fit">
+                            <select
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                value={selectedCategory}
+                                className="block w-full px-4 py-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-white "
                             >
-                                {cat.label}
-                                <span
-                                    className={`absolute bottom-0 left-0 w-full h-[6px] bg-yellow-500 transform ${selectedCategory === cat.value ? 'scale-x-100' : 'scale-x-0'
-                                        } transition-transform duration-300`}
-                                />
-                            </button>
-                        ))}
+                                {categories.map((cat) => (
+                                    <option key={cat.value} value={cat.value}>
+                                        {cat.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
 
@@ -92,12 +111,12 @@ export default function BusinessPage() {
                         </div>
                     )}
                 </section>
+                <aside className="sm:w-[30%] w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
+                    <Trending />
+                </aside>
 
-                {/* Right Side - Other categories */}
-                <div className="sticky top-16 sm:h-screen w-[30%] p-4 bg-gray-100 dark:bg-gray-900 dark:text-white rounded-lg">
-                    <h3 className="text-xl font-semibold mb-4">Trending:</h3>
-                   
-                </div>
+
+
             </div>
         </div>
     );
@@ -106,28 +125,28 @@ interface Article {
     title: string;
     overview: string;
     slug: {
-      current: string;
+        current: string;
     };
     mainImage: {
-      asset: {
-        url: string;
-      };
-      alt: string;
+        asset: {
+            url: string;
+        };
+        alt: string;
     };
     authorName: string;
     publishedDate: string;
     readTime: string;
     category?: string;
-  }
-  
-  interface ArticleCardProps {
+}
+
+interface ArticleCardProps {
     article: Article;
     large?: boolean;
-  }
-  
-  function ArticleCard({ article, large = false }: ArticleCardProps) {
+}
+
+function ArticleCard({ article, large = false }: ArticleCardProps) {
     if (!article) return null;
-  
+
     return (
         <Link href={`/${article.category}/${article.slug.current}`} passHref>
             <div
