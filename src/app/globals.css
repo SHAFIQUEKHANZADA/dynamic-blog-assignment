@@ -94,3 +94,38 @@ body {
 }
 
 
+
+/* Custom Scrollbar for .scrollDiv */
+.scrollDiv {
+  overflow-y: auto;
+
+  /* Hide scrollbar track and apply thumb colors */
+  scrollbar-width: thin; /* Thin scrollbar (for Firefox) */
+  scrollbar-color: var(--thumb-color) transparent; /* Thumb and hidden track for Firefox */
+}
+
+/* Custom Scrollbar for Webkit Browsers */
+.scrollDiv::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scrollDiv::-webkit-scrollbar-track {
+  background: transparent; /* Hide track */
+}
+
+.scrollDiv::-webkit-scrollbar-thumb {
+  background-color: var(--thumb-color); /* Thumb color */
+  border-radius: 10px; /* Rounded scrollbar */
+}
+
+/* Light and Dark Mode Colors */
+:root {
+  --thumb-color: rgb(250, 232, 232); 
+}
+:root.dark {
+  --thumb-color: #171717;  
+}
+
+body.dark {
+  --thumb-color: #171717; /* Dark mode thumb color (neutral-950) */
+}

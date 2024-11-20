@@ -62,7 +62,7 @@ export default function BusinessPage() {
                                 <button
                                     key={cat.value}
                                     onClick={() => setSelectedCategory(cat.value)}
-                                    className={`px-2 py-2 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
+                                    className={`px-1 py-2 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
                                 >
                                     {cat.label}
                                     <span
@@ -72,21 +72,28 @@ export default function BusinessPage() {
                                 </button>
                             ))}
                         </div>
-
                         {/* Select Dropdown (visible on small screens) */}
-                        <div className="sm:hidden w-fit">
+                        <div className="sm:hidden w-fit relative">
                             <select
                                 onChange={(e) => setSelectedCategory(e.target.value)}
                                 value={selectedCategory}
-                                className="block w-full px-4 py-2 bg-gray-100 text-[12px] text-gray-700 dark:bg-gray-800 dark:text-white "
+                                className="block w-full px-4 py-2 bg-gray-100 text-[14px] text-gray-700 rounded-lg shadow-md 
+                   focus:ring-2 focus:ring-yellow-500 focus:outline-none dark:bg-gray-800 dark:text-white 
+                   transition-all duration-300 cursor-pointer"
                             >
                                 {categories.map((cat) => (
-                                    <option key={cat.value} value={cat.value}>
+                                    <option
+                                        key={cat.value}
+                                        value={cat.value}
+                                        className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                                    >
                                         {cat.label}
                                     </option>
                                 ))}
                             </select>
+
                         </div>
+
                     </div>
 
 
@@ -111,12 +118,9 @@ export default function BusinessPage() {
                         </div>
                     )}
                 </section>
-                <aside className="sm:w-[30%] w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
+                <aside className="sm:w-[30%] scrollDiv w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
                     <Trending />
                 </aside>
-
-
-
             </div>
         </div>
     );
@@ -162,33 +166,37 @@ function ArticleCard({ article, large = false }: ArticleCardProps) {
                         className="group-hover:scale-110 transition-transform duration-300"
                     />
                 )}
-                <div className="absolute inset-0 bg-black bg-opacity-40 p-4 flex flex-col justify-end">
+                <div className="absolute inset-0 bg-black bg-opacity-40 sm:p-4 p-1 flex flex-col justify-end">
 
                     <h2
-                        className={`${large ? 'text-3xl' : 'text-sm'
-                            } text-white font-bold mb-2`}
+                        className={`${large ? 'text-3xl mb-2' : 'sm:text-[15px] text-[10px] sm:mb-2 mb-0'
+                            } text-white font-bold`}
                     >
                         {article.title}
                     </h2>
                     <p
-                        className={`${large ? 'text-xs mb-2' : 'text-[10px] line-clamp-2 mb-1'
-                            }  text-gray-300 w-fit p-1 px-2 line-clamp-3 `}
+                        className={`${large ? 'text-xs sm:text-[14px] mb-2 line-clamp-3 ' : 'text-[10px] sm:text-[13px] line-clamp-2 mb-1 p-1'
+                            }  text-gray-300 w-fit`}
                     >
                         {article.overview}
                     </p>
-                    <div className="flex items-center text-gray-300 text-sm">
-                        <Image
-                            src="/sa.png"
-                            alt={article.authorName}
-                            width={100}
-                            height={100}
-                            className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
-                        />
-                        <span className={`${large ? "text-[18px]" : "text-[10px]"}`}>{article.authorName}</span>
-                        <span className={`${large ? "text-[18px]" : "text-[10px]"} ml-2`}>| {article.publishedDate}</span>
-                        {article.readTime && (
-                            <span className={`${large ? "text-[18px]" : "text-[10px]"} ml-2`}>| {article.readTime} min read</span>
-                        )}
+                    <div className="flex sm:flex-row flex-col sm:gap-0 gap-2 items-start sm:items-center text-gray-300 text-sm">
+                        <div className='flex items-center'>
+                            <Image
+                                src="/sa.png"
+                                alt={article.authorName}
+                                width={100}
+                                height={100}
+                                className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
+                            />
+                            <span className={`${large ? "text-[18px]" : "text-[10px]"}`}>{article.authorName}</span>
+                        </div>
+                        <div className='flex'>
+                            <span className={`${large ? "text-[18px]" : "text-[10px]"} sm:ml-2`}>| {article.publishedDate}</span>
+                            {article.readTime && (
+                                <span className={`${large ? "text-[18px]" : "text-[10px]"} ml-2`}>| {article.readTime} min read</span>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
