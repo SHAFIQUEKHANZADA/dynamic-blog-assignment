@@ -78,7 +78,7 @@ export default function BusinessPage() {
                             <select
                                 onChange={(e) => setSelectedCategory(e.target.value)}
                                 value={selectedCategory}
-                                className="block w-full px-4 py-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-white "
+                                className="block w-full px-4 py-2 bg-gray-100 text-[12px] text-gray-700 dark:bg-gray-800 dark:text-white "
                             >
                                 {categories.map((cat) => (
                                     <option key={cat.value} value={cat.value}>

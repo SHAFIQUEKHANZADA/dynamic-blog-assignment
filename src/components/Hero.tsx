@@ -115,7 +115,7 @@ export default function HeroSection() {
     }
 
     return (
-        <section className={`${heebo.className} relative w-full h-[60vh] sm:h-[90vh] overflow-hidden`}>
+        <section className={`${heebo.className} relative w-full h-[calc(100vh-3.8rem)] sm:h-[90vh] overflow-hidden`}>
             <div className="relative w-full h-full flex overflow-hidden">
                 {articles.map((article, index) => (
                     <div
@@ -143,7 +143,7 @@ export default function HeroSection() {
                             <h3 className="text-5xl font-bold">{article.title}</h3>
 
                             {/* Overview Text - Infinite Scroll Effect */}
-                            <div className="h-24 overflow-hidden relative">
+                            <div className="sm:h-24 h-40 overflow-hidden relative">
                                 <div className="animate-scrollUp absolute inset-0 sm:w-[70%] w-[100%]">
                                     <p className="text-2xl text-gray-300">{article.overview}</p>
                                 </div>
