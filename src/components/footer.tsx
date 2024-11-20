@@ -31,7 +31,7 @@ const Footer = () => {
                 </nav>
                 <nav className={`${heebo.className} text-[18px]  flex flex-col`}>
                     <h6 className="mb-2 font-bold dark:text-gray-400 text-gray-800">Company</h6>
-                    <Link href={"/"} className="hover:underline">About us</Link>
+                    <Link href={"/about"} className="hover:underline">About us</Link>
                     <Link href={"/"} className="hover:underline">Contact</Link>
                     <Link href={"/"} className="hover:underline">Jobs</Link>
                     <Link href={"/"} className="hover:underline">Press kit</Link>
@@ -45,7 +45,7 @@ const Footer = () => {
                 <nav className={`${heebo.className} text-[18px]`}>
                     <h6 className=" mb-2 font-bold dark:text-gray-400 text-gray-800">Social</h6>
                     <div className="flex sm:gap-8 gap-4">
-                        <Link href={"/"}>
+                        <Link href={"https://www.linkedin.com/in/shafique-ur-rehman-b7b859299/"}>
                             <FaLinkedin className='text-[30px]' />
                         </Link>
 

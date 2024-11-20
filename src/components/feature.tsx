@@ -9,16 +9,16 @@ import Trending from './Trending';
 const heebo = Heebo({ subsets: ['latin'] });
 
 const categories = [
+    { label: 'Food and Drink', value: 'food-and-drink' },
     { label: 'Business', value: 'business' },
     { label: 'Technology and Innovation', value: 'technology-and-innovation' },
     { label: 'Sports', value: 'sports' },
     { label: 'Health and Fitness', value: 'health-and-fitness' },
-    { label: 'Food and Drink', value: 'food-and-drink' },
     { label: 'News and Current Affairs', value: 'news-and-currentaffairs' },
 ];
 
 export default function BusinessPage() {
-    const [selectedCategory, setSelectedCategory] = useState('business');
+    const [selectedCategory, setSelectedCategory] = useState('food-and-drink');
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -55,14 +55,14 @@ export default function BusinessPage() {
             <h1 className='text-5xl font-bold'>Featured Post</h1>
             <div className='flex sm:flex-row flex-col gap-4'>
                 <section className='sm:w-[70%] w-[100%]'>
-                    <div className="flex justify-between mt-10 mb-5 flex-wrap sm:flex-nowrap">
-                        {/* Category Buttons (visible on medium and above) */}
-                        <div className="hidden sm:flex space-x-4">
+                    <div className="flex justify-between mt-10 mb-5 flex-nowrap">
+                        {/* Category Buttons (scrollable on smaller screens, no scrollbar visible) */}
+                        <div className="flex overflow-x-auto gap-5 sm:gap-7 scrollbar-hide w-full">
                             {categories.map((cat) => (
                                 <button
                                     key={cat.value}
                                     onClick={() => setSelectedCategory(cat.value)}
-                                    className={`px-1 py-2 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
+                                    className={` py-2 flex-shrink-0 relative text-gray-700 dark:text-gray-400 text-[16px] transition-all duration-300`}
                                 >
                                     {cat.label}
                                     <span
@@ -73,26 +73,26 @@ export default function BusinessPage() {
                             ))}
                         </div>
                         {/* Select Dropdown (visible on small screens) */}
-                        <div className="sm:hidden w-fit relative">
+                        {/* <div className="sm:hidden w-fit relative">
                             <select
                                 onChange={(e) => setSelectedCategory(e.target.value)}
                                 value={selectedCategory}
-                                className="block w-full px-4 py-2 bg-gray-100 text-[14px] text-gray-700 rounded-lg shadow-md 
-                   focus:ring-2 focus:ring-yellow-500 focus:outline-none dark:bg-gray-800 dark:text-white 
+                                className="block w-full px-4 py-2 bg-white text-[14px] text-gray-700 rounded-lg shadow-md 
+                   focus:ring-2 focus:ring-yellow-500 focus:outline-none dark:bg-gray-900 dark:text-white 
                    transition-all duration-300 cursor-pointer"
                             >
                                 {categories.map((cat) => (
                                     <option
                                         key={cat.value}
                                         value={cat.value}
-                                        className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                                        className="bg-white  dark:bg-gray-900 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
                                     >
                                         {cat.label}
                                     </option>
                                 ))}
                             </select>
 
-                        </div>
+                        </div> */}
 
                     </div>
 
