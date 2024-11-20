@@ -19,7 +19,7 @@ const About = () => {
       <h2 className="text-3xl font-semibold mb-4">Our Purpose</h2>
       <p className="leading-7">
         Blog Sphare was created to cultivate a space for curious minds to explore, learn, and grow. 
-        Whether you're a tech enthusiast, a fitness lover, or a business strategist, our blog brings 
+        Whether you&apos;re a tech enthusiast, a fitness lover, or a business strategist, our blog brings 
         you well-researched content that keeps you informed and motivated.
       </p>
     </div>
@@ -28,10 +28,10 @@ const About = () => {
     <div className="mb-12">
       <h2 className="text-3xl font-semibold mb-4">Meet the Creator</h2>
       <p className="leading-7 mb-4">
-        Hi, I’m <span className="font-bold">Shafique Ur Rehman</span>, the creator of Blog Sphare. With a 
+        Hi, I&apos;m <span className="font-bold">Shafique Ur Rehman</span>, the creator of Blog Sphare. With a 
         passion for storytelling and a love for exploring new ideas, I started this platform to 
         share knowledge and ignite discussions on topics that matter. Along with a talented team of 
-        contributors, we’re committed to making Blog Sphare your go-to destination for quality content.
+        contributors, we&apos;re committed to making Blog Sphare your go-to destination for quality content.
       </p>
       <p className="leading-7">
         Outside of blogging, I enjoy [your hobbies or interests, e.g., coding, traveling, or experimenting in the kitchen]. 
@@ -43,7 +43,7 @@ const About = () => {
     <div className="mb-12">
       <h2 className="text-3xl font-semibold mb-4">Explore Our Categories</h2>
       <p className="leading-7 mb-6">
-        Dive into a variety of topics designed to inspire and inform. Here’s what you can explore:
+        Dive into a variety of topics designed to inspire and inform. Here&apos;s what you can explore:
       </p>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <li>
