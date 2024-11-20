@@ -14,13 +14,24 @@ const heebo = Heebo({ subsets: ['latin'] });
 
 const builder = imageUrlBuilder(client);
 
+// Define types for Image Assets
+interface ImageAsset {
+  _ref: string;
+  _type: string;
+}
+
+interface ImageWithAsset {
+  asset: ImageAsset;
+  alt?: string;
+}
+
 interface BlogPostPageProps {
   params: {
     slug: string;
   };
 }
 
-function urlFor(source: any) {
+function urlFor(source: ImageWithAsset) {
   return builder.image(source);
 }
 
@@ -69,7 +80,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     readTime,
      publishedDate
   }`;
-
 
   const article: Business | null = await client.fetch(articleQuery, { slug });
   const relatedTopics: Array<Business> = await client.fetch(relatedTopicsQuery, { slug });
@@ -154,11 +164,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Related Topics Sidebar */}
       <aside className={`${heebo.className} col-span-1 top-16 h-full `}>
-        <h2 className="text-2xl font-semibold mb-4">Related Topics</h2>
+        <h2 className="text-2xl font-semibold mb-4 sm:ml-4 ml-0">Related Topics</h2>
         <ul className='flex flex-col gap-4'>
           {relatedTopics.map((topic) => (
             <li key={topic.slug.current} className="mb-4">
-              <div className='ml-4 sm:ml-0'>
+              <div className='ml-4'>
                 {topic.mainImage?.asset?._ref ? (
                   <Image
                     className="w-full h-48 object-cover mb-4"
