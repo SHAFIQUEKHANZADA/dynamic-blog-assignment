@@ -14,7 +14,7 @@ const Footer = () => {
             <footer className="footer text-base-content flex md:flex-row flex-col md:gap-0 gap-10 justify-between sm:py-10 lg:px-16 sm:px-4 p-3  bg-white dark:bg-neutral-950 dark:text-white">
                 <aside className='flex flex-col'>
                     <div className={`${dosis.className} sm:text-[24px] text-[18px] sm:mb-16 mb-4`}>
-                        <span className={`${dance_font.className} bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2`}>Blog</span> Sphere
+                        <span className={`${dance_font.className} bg-yellow-500 text-white dark:bg-yellow-500 dark:text-black px-5 py-2`}>Blog</span> Sphere
                     </div>
                     <p className={`${heebo.className}`}>
                         Blog Sphere
