@@ -1,3 +1,4 @@
+// import CategorySection from "@/components/Category";
 import Featured from "@/components/feature";
 import BusinessPage from "@/components/Hero";
 
@@ -8,6 +9,7 @@ export default function Home() {
     <div>
       <BusinessPage />
       <Featured />
+      {/* <CategorySection/> */}
     </div>
   );
 }
