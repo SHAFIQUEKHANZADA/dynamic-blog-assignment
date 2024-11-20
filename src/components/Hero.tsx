@@ -149,7 +149,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="flex sm:space-x-40 sm:px-0 px-2 justify-between items-end  sm:items-center">
+                            <div className="flex items-end justify-between pr-4 sm:pr-6">
                                 <div className="flex items-center mt-2 space-x-2">
                                     <Image
                                         src={article.authorImage?.asset?._id ? urlFor(article.authorImage).url() : '/sa.png'}
