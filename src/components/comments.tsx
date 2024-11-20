@@ -102,11 +102,11 @@ const CommentSection: React.FC = () => {
             <div key={comment.id} className="comment p-4 mb-4 border-b flex items-start">
               <div className="avatar mr-4 w-10 h-10">
                 <Image
-                  src={`/sa.png`}
+                  src={"/sa.png"}
                   alt="Avatar"
-                  className="w-1 h-1 rounded-full object-cover"
-                  width={40}
-                  height={40}
+                  className="w-10 h-10 rounded-full object-cover"
+                  width={100}
+                  height={100}
                 />
               </div>
 
