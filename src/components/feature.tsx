@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Heebo } from 'next/font/google';
 import Trending from './Trending';
+import Loading from '@/app/loading';
 
 const heebo = Heebo({ subsets: ['latin'] });
 
@@ -99,7 +100,7 @@ export default function BusinessPage() {
 
                     {/* Articles Grid */}
                     {loading ? (
-                        <p className="text-center text-gray-500">Loading articles...</p>
+                       <Loading/>
                     ) : articles.length === 0 ? (
                         <p className="text-center text-gray-500">No articles found.</p>
                     ) : (
@@ -118,7 +119,7 @@ export default function BusinessPage() {
                         </div>
                     )}
                 </section>
-                <aside className="sm:w-[30%] scrollDiv w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
+                <aside className="sm:w-[30%] mt-10 sm:mt-0 scrollDiv w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
                     <Trending />
                 </aside>
             </div>

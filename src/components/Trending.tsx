@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import client, { urlFor } from "../../sanityClient";
+import Loading from "@/app/loading";
 
 interface BlogPost {
   title: string;
@@ -69,7 +70,7 @@ const Trending = () => {
     <div className="w-full  bg-white dark:bg-neutral-950 dark:text-white rounded-lg">
       <h3 className="text-2xl font-semibold mb-4 dark:text-gray-400">Trending:</h3>
       {loading ? (
-        <p className="text-gray-500">Loading trending posts...</p>
+       <Loading/>
       ) : trendingPosts.length === 0 ? (
         <p className="text-gray-500">No trending posts available.</p>
       ) : (

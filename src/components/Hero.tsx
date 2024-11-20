@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Heebo } from 'next/font/google';
 import client, { urlFor } from '../../sanityClient';
+import Loading from '@/app/loading';
 
 const heebo = Heebo({ subsets: ['latin'] });
 
@@ -111,7 +112,7 @@ export default function HeroSection() {
     }, [articles]);
 
     if (articles.length === 0) {
-        return <p className="text-center text-gray-500">Loading articles...</p>;
+        return  <Loading/>;
     }
 
     return (
