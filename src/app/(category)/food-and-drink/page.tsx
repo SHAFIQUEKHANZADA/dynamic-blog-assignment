@@ -4,9 +4,9 @@ import { FoodandDrink } from '../../../../types';
 import { Heebo } from 'next/font/google';
 import Image from 'next/image';
 
- 
+
 const heebo = Heebo({ subsets: ['latin'] });
- 
+
 
 export default async function BusinessPage() {
   const query = `*[_type == "food-and-drink"] {
@@ -46,11 +46,11 @@ export default async function BusinessPage() {
                 <div className="w-full md:w-64 mb-6 md:mb-0 md:mr-4 flex-shrink-0 sm:h-[250px]">
                   {article.mainImage?.asset && (
                     <Image
-                      className="object-cover w-full h-48 md:h-full"
-                      src={urlFor(article.mainImage).url()}
+                      src={urlFor(article.mainImage).width(500).height(300).url()}
                       alt={article.mainImage.alt || 'Main image'}
-                      width={100}
-                      height={100}
+                      width={500}
+                      height={300}
+                      className="object-cover w-full h-48 md:h-full"
                     />
                   )}
                 </div>
@@ -117,12 +117,12 @@ export default async function BusinessPage() {
             </li>
             <li>
               <Link href="/sports" className="text-indigo-500 hover:underline">
-               Sports
+                Sports
               </Link>
             </li>
             <li>
               <Link href="/technology-and-innovation" className="text-indigo-500 hover:underline">
-               Technology and Innovation
+                Technology and Innovation
               </Link>
             </li>
           </ul>

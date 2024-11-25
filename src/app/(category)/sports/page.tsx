@@ -45,13 +45,13 @@ export default async function BusinessPage() {
               >
                 <div className="w-full md:w-64 mb-6 md:mb-0 md:mr-4 flex-shrink-0 sm:h-[250px]">
                   {article.mainImage?.asset && (
-                    <Image
-                      className="object-cover w-full h-48 md:h-full"
-                      src={urlFor(article.mainImage).url()}
-                      alt={article.mainImage.alt || 'Main image'}
-                      width={100}
-                      height={100}
-                    />
+                   <Image
+                   src={urlFor(article.mainImage).width(500).height(300).url()}  
+                   alt={article.mainImage.alt || 'Main image'}
+                   width={500}
+                   height={300}
+                   className="object-cover w-full h-48 md:h-full"
+                 />
                   )}
                 </div>
                 <div className="md:flex-grow">
