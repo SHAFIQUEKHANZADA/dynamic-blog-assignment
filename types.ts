@@ -79,7 +79,6 @@ export interface FoodandDrink {
   };
 }
 
-
 // 3: Health and Fitness
 export interface HealthndFitness {
   title: string;

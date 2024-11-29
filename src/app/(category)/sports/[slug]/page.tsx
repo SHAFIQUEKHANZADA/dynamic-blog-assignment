@@ -14,7 +14,6 @@ const heebo = Heebo({ subsets: ['latin'] });
 
 const builder = imageUrlBuilder(client);
 
-// Define types for Image Assets
 interface ImageAsset {
   _ref: string;
   _type: string;
@@ -38,7 +37,7 @@ function urlFor(source: ImageWithAsset) {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = params;
 
-  // Fetch the individual article using the slug
+  // Updated Queries for consistency
   const articleQuery = `*[_type == "sports" && slug.current == $slug][0] {
     title,
     overview,
@@ -51,8 +50,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     authorAvatar {
       asset {
         _ref,
-        _type,
-        url
+        _type
       }
     },
     readTime,
@@ -78,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       }
     },
     readTime,
-     publishedDate
+    publishedDate
   }`;
 
   const article: Sports | null = await client.fetch(articleQuery, { slug });
@@ -88,7 +86,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  // Format the published date
   const formattedDate = article.publishedDate
     ? new Date(article.publishedDate).toLocaleDateString('en-US', {
       month: 'short',
@@ -100,26 +97,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="container mx-auto px-4 sm:px-1 sm:py-16 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="col-span-2">
-        {/* Title */}
         <h1 className="sm:text-4xl text-3xl font-bold mb-4">{article.title}</h1>
 
-        {/* Main Image */}
         {article.mainImage?.asset && (
           <Image
             className="w-full object-cover object-center mb-6"
             src={urlFor(article.mainImage).url()}
             alt={article.mainImage.alt || 'Main image'}
-            width={1200} // Full width image
-            height={600} // Adjust height as needed
+            width={1200}
+            height={600}
           />
         )}
 
-        {/* Author Info, Read Time, and Publish Date */}
         <div className="flex items-center mb-6">
-          {article.authorAvatar?.asset?.url ? (
+          {article.authorAvatar?.asset?._ref ? (
             <Image
               className="w-10 h-10 rounded-full mr-3"
-              src={article.authorAvatar.asset.url}
+              src={urlFor(article.authorAvatar).url()}
               alt={article.authorName || 'Author Avatar'}
               width={40}
               height={40}
@@ -127,7 +121,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           ) : (
             <Image
               className="w-10 h-10 rounded-full mr-3"
-              src="/sa.png" // Fallback image
+              src="/sa.png"
               alt="Default Author Avatar"
               width={40}
               height={40}
@@ -143,36 +137,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </div>
 
-        {/* Overview */}
         <p className={`${heebo.className} text-lg mb-6`}>{article.overview}</p>
 
-        {/* Render Content using PortableText */}
         <div className={`${heebo.className} prose mb-8`}>
           <PortableText value={article.content} />
         </div>
 
-        {/* Share Buttons */}
         <div className="mt-10">
           <ShareButtons slug={slug} title={article.title} />
         </div>
 
-        {/* Comment Section */}
         <div className="mt-10">
           <CommentSection />
         </div>
       </div>
 
-      {/* Related Topics Sidebar */}
-      <aside className={`${heebo.className} col-span-1 top-16 h-full `}>
+      <aside className={`${heebo.className} col-span-1 top-16 h-full`}>
         <h2 className="text-2xl font-semibold mb-4 sm:ml-4 ml-0">Related Topics</h2>
-        <ul className='flex flex-col gap-4'>
+        <ul className="flex flex-col gap-4">
           {relatedTopics.map((topic) => (
             <li key={topic.slug.current} className="mb-4">
-              <div className='ml-4'>
+              <div className="ml-4">
                 {topic.mainImage?.asset?._ref ? (
                   <Image
                     className="w-full h-48 object-cover mb-4"
-                    src={urlFor(topic.mainImage).url()}   
+                    src={urlFor(topic.mainImage).url()}
                     alt={topic.title}
                     width={500}
                     height={300}
@@ -180,7 +169,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 ) : (
                   <Image
                     className="w-full h-48 object-cover mb-4"
-                    src="/placeholder-image.jpg"   
+                    src="/placeholder-image.jpg"
                     alt="Fallback image"
                     width={500}
                     height={300}
@@ -193,7 +182,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   {topic.authorAvatar?.asset?._ref ? (
                     <Image
                       className="w-8 h-8 rounded-full mr-2"
-                      src={urlFor(topic.authorAvatar).url()}  
+                      src={urlFor(topic.authorAvatar).url()}
                       alt={topic.authorName || 'Author Avatar'}
                       width={32}
                       height={32}
@@ -201,7 +190,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   ) : (
                     <Image
                       className="w-8 h-8 rounded-full mr-2"
-                      src="/sa.png"  
+                      src="/sa.png"
                       alt="Default Author Avatar"
                       width={32}
                       height={32}
@@ -210,8 +199,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <div>
                     <span className="text-sm text-gray-600">{topic.authorName || 'Unknown Author'}</span>
                     <div>
-                    <span className="text-sm text-gray-600">{topic.publishedDate && `${topic.publishedDate}`}</span>
-                    <span className="text-sm text-gray-600 ml-2">{topic.readTime && `${topic.readTime} min read`}</span>
+                      <span className="text-sm text-gray-600">{topic.publishedDate && `${topic.publishedDate}`}</span>
+                      <span className="text-sm text-gray-600 ml-2">{topic.readTime && `${topic.readTime} min read`}</span>
                     </div>
                   </div>
                 </div>

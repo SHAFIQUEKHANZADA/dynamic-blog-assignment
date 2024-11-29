@@ -34,7 +34,7 @@ interface Article {
 
 export default function HeroSection() {
     // Define the type of `articles` explicitly
-    const [articles, setArticles] = useState<Article[]>([]);  // <- Add type here
+    const [articles, setArticles] = useState<Article[]>([]);  
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {

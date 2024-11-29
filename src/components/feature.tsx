@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import client, { urlFor } from '../../sanityClient';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Heebo } from 'next/font/google';
-import Trending from './Trending';
 import Loading from '@/app/loading';
+import Trending from './Trending';
 
 const heebo = Heebo({ subsets: ['latin'] });
 
@@ -39,6 +39,11 @@ export default function BusinessPage() {
         },
         category,
         authorName,
+        authorAvatar {
+          asset {
+            _ref
+          }
+        },
         publishedDate,
         readTime
       }`;
@@ -73,34 +78,11 @@ export default function BusinessPage() {
                                 </button>
                             ))}
                         </div>
-                        {/* Select Dropdown (visible on small screens) */}
-                        {/* <div className="sm:hidden w-fit relative">
-                            <select
-                                onChange={(e) => setSelectedCategory(e.target.value)}
-                                value={selectedCategory}
-                                className="block w-full px-4 py-2 bg-white text-[14px] text-gray-700 rounded-lg shadow-md 
-                   focus:ring-2 focus:ring-yellow-500 focus:outline-none dark:bg-gray-900 dark:text-white 
-                   transition-all duration-300 cursor-pointer"
-                            >
-                                {categories.map((cat) => (
-                                    <option
-                                        key={cat.value}
-                                        value={cat.value}
-                                        className="bg-white  dark:bg-gray-900 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-                                    >
-                                        {cat.label}
-                                    </option>
-                                ))}
-                            </select>
-
-                        </div> */}
-
                     </div>
-
 
                     {/* Articles Grid */}
                     {loading ? (
-                       <Loading/>
+                        <Loading />
                     ) : articles.length === 0 ? (
                         <p className="text-center text-gray-500">No articles found.</p>
                     ) : (
@@ -119,13 +101,15 @@ export default function BusinessPage() {
                         </div>
                     )}
                 </section>
-                <aside className="sm:w-[30%] mt-10 sm:mt-0 scrollDiv w-[100%] bg-white h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
+
+                <aside className="sm:w-[30%] mt-10 sm:mt-0 scrollDiv w-[100%] bg-white sm:h-screen h-full overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-transparent  dark:scrollbar-thumb-neutral-950  dark:bg-neutral-950 rounded-lg">
                     <Trending />
                 </aside>
             </div>
         </div>
     );
 }
+
 interface Article {
     title: string;
     overview: string;
@@ -141,6 +125,11 @@ interface Article {
     authorName: string;
     publishedDate: string;
     readTime: string;
+    authorAvatar?: {
+        asset: {
+            _ref: string;
+        };
+    };
     category?: string;
 }
 
@@ -154,10 +143,7 @@ function ArticleCard({ article, large = false }: ArticleCardProps) {
 
     return (
         <Link href={`/${article.category}/${article.slug.current}`} passHref>
-            <div
-                className={`relative group ${large ? 'h-full' : 'h-[250px]'
-                    } rounded-lg overflow-hidden shadow-lg`}
-            >
+            <div className={`relative group ${large ? 'h-full' : 'h-[250px]'} rounded-lg overflow-hidden shadow-lg`}>
                 {article.mainImage?.asset && (
                     <Image
                         src={urlFor(article.mainImage).url()}
@@ -170,32 +156,41 @@ function ArticleCard({ article, large = false }: ArticleCardProps) {
                 <div className="absolute inset-0 bg-black bg-opacity-40 sm:p-4 p-1 flex flex-col justify-end">
 
                     <h2
-                        className={`${large ? 'text-3xl mb-2' : 'sm:text-[15px] text-[10px] sm:mb-2 mb-0'
-                            } text-white font-bold`}
+                        className={`${large ? 'text-3xl mb-2' : 'sm:text-[15px] text-[10px] sm:mb-2 mb-0'} text-white font-bold`}
                     >
                         {article.title}
                     </h2>
                     <p
-                        className={`${large ? 'text-xs sm:text-[14px] mb-2 line-clamp-3 ' : 'text-[10px] sm:text-[13px] line-clamp-2 mb-1 p-1'
-                            }  text-gray-300 w-fit`}
+                        className={`${large ? 'text-xs sm:text-[14px] mb-2 line-clamp-3 ' : 'text-[10px] sm:text-[13px] line-clamp-2 mb-1 p-1'}  text-gray-300 w-fit`}
                     >
                         {article.overview}
                     </p>
-                    <div className="flex sm:flex-row flex-col sm:gap-0 gap-2 items-start sm:items-center text-gray-300 text-sm">
+                    <div className="flex sm:flex-row flex-col sm:gap-0   items-start sm:items-center text-gray-300 text-sm">
                         <div className='flex items-center'>
-                            <Image
-                                src="/sa.png"
-                                alt={article.authorName}
-                                width={100}
-                                height={100}
-                                className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
-                            />
+                            {/* Author Avatar */}
+                            {article.authorAvatar?.asset ? (
+                                <Image
+                                    src={urlFor(article.authorAvatar.asset).url()}
+                                    alt={article.authorName}
+                                    width={32}
+                                    height={32}
+                                    className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
+                                />
+                            ) : (
+                                <Image
+                                    src="/sa.png"
+                                    alt={article.authorName}
+                                    width={32}
+                                    height={32}
+                                    className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
+                                />
+                            )}
                             <span className={`${large ? "text-[18px]" : "text-[10px]"}`}>{article.authorName}</span>
                         </div>
-                        <div className='flex'>
+                        <div className={`${large ? "flex sm:mt-0 mt-3" : "flex sm:mt-0 mt-1"}`}>
                             <span className={`${large ? "text-[18px]" : "text-[10px]"} sm:ml-2`}>| {article.publishedDate}</span>
                             {article.readTime && (
-                                <span className={`${large ? "text-[18px]" : "text-[10px]"} ml-2`}>| {article.readTime} min read</span>
+                                <span className={`${large ? "text-[18px] ml-2" : "text-[10px]"}`}>| {article.readTime} min read</span>
                             )}
                         </div>
                     </div>

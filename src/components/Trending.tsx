@@ -13,11 +13,11 @@ interface BlogPost {
   mainImage?: { asset: { _id: string; url: string }; alt?: string };
   category: string;
   authorName: string;
+  authorAvatar?: { asset: { _ref: string; _type: string } };
   publishedDate: string;
   readTime?: string;
 }
 
-// Array of categories
 const categories = [
   "business",
   "health-and-fitness",
@@ -36,8 +36,7 @@ const Trending = () => {
       setLoading(true);
 
       const queries = categories.map(
-        (category) => `
-          *[_type == "${category}"] | order(_createdAt desc)[0] {
+        (category) => `*[_type == "${category}"] | order(_createdAt desc)[0] {
             title,
             overview,
             slug,
@@ -47,15 +46,20 @@ const Trending = () => {
             },
             category,
             authorName,
+            authorAvatar {
+              asset {
+                _ref,
+                _type
+              }
+            },
             publishedDate,
             readTime
-          }
-        `
+          }`
       );
 
       try {
         const results = await Promise.all(queries.map((query) => client.fetch(query)));
-        setTrendingPosts(results.filter((post) => post));  
+        setTrendingPosts(results.filter((post) => post));
       } catch (error) {
         console.error("Error fetching trending posts:", error);
       } finally {
@@ -67,10 +71,10 @@ const Trending = () => {
   }, []);
 
   return (
-    <div className="w-full  bg-white dark:bg-neutral-950 dark:text-white rounded-lg">
+    <div className="w-full bg-white dark:bg-neutral-950 dark:text-white rounded-lg">
       <h3 className="text-2xl font-semibold mb-4 dark:text-gray-400">Trending:</h3>
       {loading ? (
-       <Loading/>
+        <Loading />
       ) : trendingPosts.length === 0 ? (
         <p className="text-gray-500">No trending posts available.</p>
       ) : (
@@ -87,9 +91,9 @@ const Trending = () => {
 const TrendingCard = ({ post }: { post: BlogPost }) => {
   return (
     <Link href={`/${post.category}/${post.slug.current}`}>
-      <div className="flex items-center gap-2 group sm:my-10 my-5">
+      <div className="flex items-center gap-2 sm:gap-0 group sm:my-10 my-5">
         {/* Thumbnail */}
-        <div className="w-28 h-28 ">
+        <div className="sm:w-28 sm:h-28">
           {post.mainImage?.asset && (
             <Image
               src={urlFor(post.mainImage.asset).url()}
@@ -111,13 +115,23 @@ const TrendingCard = ({ post }: { post: BlogPost }) => {
             {post.overview}
           </p>
           <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-2">
-            <Image
-              src="/sa.png"
-              alt={post.authorName}
-              width={24}
-              height={24}
-              className="w-4 h-4 rounded-full mr-2"
-            />
+            {post.authorAvatar?.asset ? (
+              <Image
+                className="w-5 h-5 rounded-full mr-2"
+                src={urlFor(post.authorAvatar.asset).url()}
+                alt={post.authorName || "Author Avatar"}
+                width={32}
+                height={32}
+              />
+            ) : (
+              <Image
+                className="w-5 h-5 rounded-full mr-2"
+                src="/sa.png"
+                alt="Default Author Avatar"
+                width={32}
+                height={32}
+              />
+            )}
             <span className="text-[10px]">{post.authorName}</span>
             <span className="ml-2 text-[10px]">| {post.publishedDate}</span>
             {post.readTime && <span className="ml-2 text-[10px]">| {post.readTime} min read</span>}
