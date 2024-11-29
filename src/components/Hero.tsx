@@ -170,7 +170,7 @@ export default function HeroSection() {
                                 </div>
 
                                 <Link href={`/${article.category}/${article.slug.current}`} passHref>
-                                    <button className="bg-transparent border dark:border-white hover:bg-transparent/45 duration-300 hover:scale-105 text-[12px] text-white font-bold py-2 px-4 rounded">
+                                    <button className="bg-transparent border dark:border-white hover:bg-transparent/45 duration-300 hover:scale-105 text-[12px] text-white font-bold py-2 px-4 rounded-3xl">
                                         Read More
                                     </button>
                                 </Link>
