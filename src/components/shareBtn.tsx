@@ -1,70 +1,72 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { FaTwitter, FaLinkedin, FaWhatsapp, FaFacebookF } from 'react-icons/fa';
 
-const ShareButton = ({ title, url }: any) => {
-    const [isClient, setIsClient] = useState(false);
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { FaTwitter, FaLinkedin, FaWhatsapp, FaFacebookF } from "react-icons/fa";
 
-    useEffect(() => {
-        // This will ensure the component runs only on the client-side
-        setIsClient(true);
-    }, []);
+function generateShareLinks(url: string, title: string) {
+  const encodedUrl = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title);
 
-    // Fallback if the component is not rendered on the client side
-    if (!isClient) {
-        return null;
-    }
+  return {
+    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+  };
+}
 
-    const currentUrl = url || window.location.href;
+interface ShareButtonProps {
+  title: string;
+}
 
-    const shareOnFacebook = () => {
-        window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
-            '_blank',
-            'width=600,height=400'
-        );
-    };
+const ShareButton: React.FC<ShareButtonProps> = ({ title }) => {
+  const [currentUrl, setCurrentUrl] = useState("");
 
-    const shareOnTwitter = () => {
-        window.open(
-            `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}`,
-            '_blank',
-            'width=600,height=400'
-        );
-    };
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
 
-    const shareOnLinkedIn = () => {
-        window.open(
-            `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
-            '_blank',
-            'width=600,height=400'
-        );
-    };
+  if (!currentUrl) return null;  
 
-    const shareOnWhatsapp = () => {
-        window.open(
-            `https://wa.me/?text=${title} ${currentUrl}`,
-            '_blank',
-            'width=600,height=400'
-        );
-    };
+  const shareLinks = generateShareLinks(currentUrl, title);
 
-    return (
-        <div className="flex sm:flex-row flex-col sm:gap-4 gap-2">
-            <button onClick={shareOnFacebook} className="text-[12px] sm:text-[20px]">
-                <FaFacebookF   />
-            </button>
-            <button onClick={shareOnTwitter} className="text-[12px] sm:text-[20px]">
-                <FaTwitter   />
-            </button>
-            <button onClick={shareOnLinkedIn} className="text-[12px] sm:text-[20px]">
-                <FaLinkedin   />
-            </button>
-            <button onClick={shareOnWhatsapp} className="text-[12px] sm:text-[20px]">
-                <FaWhatsapp   />
-            </button>
-        </div>
-    );
+  return (
+    <div className="flex sm:flex-row flex-col sm:gap-4 gap-2">
+      <Link
+        href={shareLinks.facebook}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12px] sm:text-[20px]"
+      >
+        <FaFacebookF />
+      </Link>
+      <Link
+        href={shareLinks.twitter}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12px] sm:text-[20px]"
+      >
+        <FaTwitter />
+      </Link>
+      <Link
+        href={shareLinks.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12px] sm:text-[20px]"
+      >
+        <FaLinkedin />
+      </Link>
+      <Link
+        href={shareLinks.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12px] sm:text-[20px]"
+      >
+        <FaWhatsapp />
+      </Link>
+    </div>
+  );
 };
 
 export default ShareButton;

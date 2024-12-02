@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { ModeToggle } from './toggleMode';
-import { Bokor, Dancing_Script, Dosis, Kings } from 'next/font/google';
+import { Bokor, Kings } from 'next/font/google';
 import Link from 'next/link';
 import { Heebo } from 'next/font/google';
 import {
@@ -15,10 +15,8 @@ import ShareButton from './shareBtn';
 import { FaSearch } from 'react-icons/fa';
 
 
-
-const dance_font = Dancing_Script({ subsets: ['latin'] });
+ 
 const heebo = Heebo({ subsets: ['latin'] });
-const dosis = Dosis({ subsets: ['latin'] });
 const king = Kings({ subsets: ['latin'], weight: ['400'] });
 const bokor = Bokor({ subsets: ['latin'], weight: ['400'] })
 
@@ -47,11 +45,11 @@ const Navbar = () => {
     return (
 
 
-        <div className='flex flex-col justify-center sm:items-center items-end relative mb-4'>
+        <div className='flex flex-col justify-center sm:items-center items-end relative sm:mb-4'>
             <div className="flex sm:items-start items-center justify-between w-full relative sm:px-5 px-2 sm:pb-14 sm:pt-5 pt-2">
                 {/* ShareButton on the left */}
                 <div className="flex items-center">
-                    <ShareButton />
+                <ShareButton title="Check out this amazing post!" />
                 </div>
 
                 {/* Modern Narrative in the center */}
@@ -65,7 +63,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <div className="flex justify-end sm:justify-between sm:px-4 px-2 gap-3 items-center w-full sm:border-t sm:border-b border-gray-300">
+            <div className="flex justify-end sm:justify-between sm:px-4 px-2 items-center w-full sm:border-t sm:border-b border-gray-300">
 
                 <span className='sm:hidden block'><ModeToggle /></span>
 

@@ -1,23 +1,22 @@
-import { Dancing_Script, Dosis, Heebo } from 'next/font/google';
+import { Heebo, Kings } from 'next/font/google';
 import Link from 'next/link';
 import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 
 
-const dosis = Dosis({ subsets: ['latin'] });
 const heebo = Heebo({ subsets: ['latin'] });
-const dance_font = Dancing_Script({ subsets: ['latin'] });
+const king = Kings({ subsets: ['latin'], weight: ['400'] });
 const Footer = () => {
     return (
         <div>
             <footer className="footer text-base-content flex md:flex-row flex-col md:gap-0 gap-10 justify-between sm:py-10 lg:px-16 sm:px-4 p-3  bg-white dark:bg-neutral-950 dark:text-white">
                 <aside className='flex flex-col'>
-                    <div className={`${dosis.className} sm:text-[24px] text-[18px] sm:mb-16 mb-4`}>
-                        <span className={`${dance_font.className} bg-yellow-500 text-white dark:bg-yellow-500 dark:text-black px-5 py-2`}>Blog</span> Sphere
+                    <div className={`${king.className} sm:text-[34px] text-[28px] sm:mb-10 mb-4`}>
+                        <span> Modern Narrative</span>
                     </div>
                     <p className={`${heebo.className}`}>
-                        Blog Sphere
+                    Modern Narrative
                         <br />
                         Providing reliable tech since 1992
                     </p>
@@ -67,7 +66,7 @@ const Footer = () => {
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700  to-transparent mb-8 sm:mt-0 mt-6 h-[1px] w-full">
                 {/* <hr className=""/> */}
                 <p className={`${heebo.className} px-10 text-center py-6 font-normal text-[12px] dark:text-zinc-200 dark:bg-neutral-950`}>
-                    © 2024 Blog Sphere™. All Rights Reserved.
+                    © 2024  Modern Narrative™. All Rights Reserved.
                 </p>
             </div>
         </div>
