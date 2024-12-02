@@ -139,9 +139,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <p className={`${heebo.className} text-lg mb-6`}>{article.overview}</p>
 
-        <div className={`${heebo.className} prose mb-8`}>
+        <div className={`${heebo.className} prose mb-8 dark:text-white dark:prose-invert`}>
           <PortableText value={article.content} />
         </div>
+
 
         <div className="mt-10">
           <ShareButtons slug={slug} title={article.title} />

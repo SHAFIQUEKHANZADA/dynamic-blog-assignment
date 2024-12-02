@@ -116,7 +116,7 @@ export default function HeroSection() {
     }
 
     return (
-        <section className={`${heebo.className} relative w-full h-[calc(100vh-3.8rem)] sm:h-[calc(100vh-4rem)]  overflow-hidden`}>
+        <section className={`${heebo.className} relative w-full h-[calc(100vh-7rem)] sm:h-[calc(100vh-9rem)]  overflow-hidden`}>
             <div className="relative w-full h-full flex overflow-hidden">
                 {articles.map((article, index) => (
                     <div
