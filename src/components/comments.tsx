@@ -182,7 +182,7 @@ const CommentSection: React.FC = () => {
           />
         </div>
 
-        <button type="submit" className="sm:w-[200px] w-full bg-blue-500 dark:bg-gray-500 text-white p-3 rounded-sm  hover:bg-blue-700 dark:hover:bg-blue-600 transition">
+        <button type="submit" className="sm:w-[200px] w-full bg-blue-500 dark:bg-blue-400 text-white p-3 rounded-sm  hover:bg-blue-700 dark:hover:bg-blue-600 transition">
           Post Comment
         </button>
       </form>

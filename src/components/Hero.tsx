@@ -141,12 +141,12 @@ export default function HeroSection() {
 
                         {/* Author Information - Bottom Left */}
                         <div className="absolute bottom-8 left-4 text-white flex flex-col gap-5">
-                            <h3 className="text-5xl font-bold">{article.title}</h3>
+                            <h3 className="sm:text-5xl text-4xl font-bold">{article.title}</h3>
 
                             {/* Overview Text - Infinite Scroll Effect */}
                             <div className="sm:h-24 h-40 overflow-hidden relative">
                                 <div className="animate-scrollUp absolute inset-0 sm:w-[70%] w-[100%]">
-                                    <p className="text-2xl text-gray-300">{article.overview}</p>
+                                    <p className="sm:text-2xl text-xl text-gray-300">{article.overview}</p>
                                 </div>
                             </div>
 

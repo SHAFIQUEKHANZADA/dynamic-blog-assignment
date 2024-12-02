@@ -46,15 +46,15 @@ const Navbar = () => {
 
 
         <div className='flex flex-col justify-center sm:items-center items-end relative sm:mb-4'>
-            <div className="flex sm:items-start items-center justify-between w-full relative sm:px-5 px-2 sm:pb-14 sm:pt-5 pt-2">
+            <div className="flex sm:items-start items-center justify-between w-full relative sm:px-5 px-2 sm:pb-14 sm:pt-8 pt-2">
                 {/* ShareButton on the left */}
                 <div className="flex items-center">
                 <ShareButton title="Check out this amazing post!" />
                 </div>
 
                 {/* Modern Narrative in the center */}
-                <div className={`${king.className} md:text-7xl text-2xl font-bold absolute left-1/2 transform -translate-x-1/2 text-center`}>
-                    Modern Narrative
+                <div className={`${king.className} md:text-6xl text-3xl font-bold absolute left-1/2 transform -translate-x-1/2 text-center`}>
+                The Modern Narrative
                 </div>
 
                 {/* FaSearch on the right */}
@@ -67,7 +67,7 @@ const Navbar = () => {
 
                 <span className='sm:hidden block'><ModeToggle /></span>
 
-                <div className={`${bokor.className} sm:text-[20px] flex items-center  sm:space-x-10 `}>
+                <div className={`${bokor.className} sm:text-[20px] flex items-center  sm:space-x-10`}>
                     {items.map((item, i) => (
                         <li key={i} className="list-none hidden sm:flex">
                             <Link href={item.link}>
@@ -81,7 +81,7 @@ const Navbar = () => {
                             <DropdownMenuTrigger className='flex gap-2 items-center'>
                                 Category <span><IoIosArrowDown /></span>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className='p-4 mr-3 mt-[14px] rounded-sm'>
+                            <DropdownMenuContent className={`${bokor.className} p-4 mr-3 mt-[14px] rounded-sm`}>
                                 <Link href={"/technology-and-innovation"}>
                                     <DropdownMenuItem className='text-[20px]'>Technology and Innovation</DropdownMenuItem>
                                 </Link>
@@ -131,8 +131,8 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 {isMenuOpen && (
                     <div className={`${heebo.className} fixed top-0 left-0 h-full w-[65%] sm:w-[60%] bg-white dark:bg-neutral-950 dark:text-white text-black shadow-lg transition-transform transform translate-x-0 z-50`}>
-                        <div className="flex justify-between items-center p-4 pt-5 border-b border-gray-700">
-                            <span className="text-lg font-bold">Menu</span>
+                        <div className="flex justify-between items-center p-4 pt-5">
+                            <span className={`${king.className} text-lg font-bold`}>The Modern Narrative</span>
                             <button onClick={toggleMenu} className="focus:outline-none dark:text-white text-black">
                                 <svg
                                     className="w-6 h-6"
@@ -150,7 +150,7 @@ const Navbar = () => {
                                 </svg>
                             </button>
                         </div>
-                        <ul className="p-4 space-y-4">
+                        <ul className={`${bokor.className} p-4 space-y-4`}>
                             {items.map((item, i) => (
                                 <li key={i} className="list-none">
                                     <Link href={item.link}>
@@ -158,10 +158,10 @@ const Navbar = () => {
                                     </Link>
                                 </li>
                             ))}
-                            <div className='sm:hidden block'>
+                            <div className={`${bokor.className} sm:hidden block`}>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
-                                    <DropdownMenuContent className='border-none shadow-none'>
+                                    <DropdownMenuContent className={`${bokor.className} border-none shadow-none`}>
                                         <Link href={"/technology-and-innovation"}><DropdownMenuItem>Technology and Innovation</DropdownMenuItem></Link>
                                         <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
                                         <Link href={"/business"}><DropdownMenuItem>Business</DropdownMenuItem></Link>

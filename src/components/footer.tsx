@@ -13,10 +13,10 @@ const Footer = () => {
             <footer className="footer text-base-content flex md:flex-row flex-col md:gap-0 gap-10 justify-between sm:py-10 lg:px-16 sm:px-4 p-3  bg-white dark:bg-neutral-950 dark:text-white">
                 <aside className='flex flex-col'>
                     <div className={`${king.className} sm:text-[34px] text-[28px] sm:mb-10 mb-4`}>
-                        <span> Modern Narrative</span>
+                        <span>The Modern Narrative</span>
                     </div>
                     <p className={`${heebo.className}`}>
-                    Modern Narrative
+                    The Modern Narrative
                         <br />
                         Providing reliable tech since 1992
                     </p>
@@ -66,7 +66,7 @@ const Footer = () => {
             <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700  to-transparent mb-8 sm:mt-0 mt-6 h-[1px] w-full">
                 {/* <hr className=""/> */}
                 <p className={`${heebo.className} px-10 text-center py-6 font-normal text-[12px] dark:text-zinc-200 dark:bg-neutral-950`}>
-                    © 2024  Modern Narrative™. All Rights Reserved.
+                    © 2024 The Modern Narrative™. All Rights Reserved.
                 </p>
             </div>
         </div>

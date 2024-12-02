@@ -58,7 +58,7 @@ export default function BusinessPage() {
 
     return (
         <div className={`${heebo.className} text-gray-600  dark:text-gray-400 body-font sm:px-8 px-2 my-20`}>
-            <h1 className='text-5xl font-bold'>Featured Post</h1>
+            <h1 className='sm:text-5xl text-4xl font-bold'>Featured Post</h1>
             <div className='flex sm:flex-row flex-col gap-4'>
                 <section className='sm:w-[70%] w-[100%]'>
                     <div className="flex justify-between mt-10 mb-5 flex-nowrap">
@@ -165,16 +165,15 @@ function ArticleCard({ article, large = false }: ArticleCardProps) {
                     >
                         {article.overview}
                     </p>
-                    <div className="flex sm:flex-row flex-col sm:gap-0   items-start sm:items-center text-gray-300 text-sm">
+                    <div className="flex sm:flex-row flex-col sm:gap-0  items-start sm:items-center text-gray-300 text-sm">
                         <div className='flex items-center'>
-                            {/* Author Avatar */}
                             {article.authorAvatar?.asset ? (
                                 <Image
                                     src={urlFor(article.authorAvatar.asset).url()}
                                     alt={article.authorName}
                                     width={32}
                                     height={32}
-                                    className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full  mr-2`}
+                                    className={`${large ? "w-8 h-8" : "w-5 h-5"} rounded-full mr-2`}
                                 />
                             ) : (
                                 <Image
