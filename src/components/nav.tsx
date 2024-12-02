@@ -4,24 +4,21 @@ import { ModeToggle } from './toggleMode';
 import { Bokor, Kings } from 'next/font/google';
 import Link from 'next/link';
 import { Heebo } from 'next/font/google';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { IoIosArrowDown } from 'react-icons/io';
 import ShareButton from './shareBtn';
 import SearchComponent from './SearchComponent';
+import CustomDropdown from './CustomDropdown';
 
 
- 
+
 const heebo = Heebo({ subsets: ['latin'] });
 const king = Kings({ subsets: ['latin'], weight: ['400'] });
 const bokor = Bokor({ subsets: ['latin'], weight: ['400'] })
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
     const items = [
         {
@@ -38,26 +35,24 @@ const Navbar = () => {
         },
     ];
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
     return (
 
 
         <div className='flex flex-col justify-center sm:items-center items-end relative sm:mb-4'>
             <div className="flex sm:items-start items-center justify-between w-full relative sm:px-5 px-2 sm:pb-14 sm:pt-8 pt-2">
-                
+
                 <div className="flex items-center">
-                <ShareButton title="Check out this amazing post!" />
+                    <ShareButton title="Check out this amazing post!" />
                 </div>
- 
-                <div className={`${king.className} md:text-6xl text-3xl font-bold absolute left-1/2 transform -translate-x-1/2 text-center`}>
-                The Modern Narrative
-                </div>
- 
+
+                <Link href={"/"}>
+                    <div className={`${king.className} md:text-6xl text-3xl tracking-tighter font-bold absolute left-1/2 transform -translate-x-1/2 text-center`}>
+                        The Modern Narrative
+                    </div>
+                </Link>
+
                 <div className="flex items-center">
-                   <SearchComponent/>
+                    <SearchComponent />
                 </div>
             </div>
 
@@ -73,33 +68,9 @@ const Navbar = () => {
                             </Link>
                         </li>
                     ))}
-
+                  
                     <div className='sm:flex hidden'>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className='flex gap-2 items-center outline-none'>
-                                Category <span><IoIosArrowDown /></span>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className={`${bokor.className} p-4 mr-3 mt-[14px] rounded-sm`}>
-                                <Link href={"/technology-and-innovation"}>
-                                    <DropdownMenuItem className='text-[20px]'>Technology and Innovation</DropdownMenuItem>
-                                </Link>
-                                <Link href={"/sports"}>
-                                    <DropdownMenuItem className='text-[20px]'>Sports</DropdownMenuItem>
-                                </Link>
-                                <Link href={"/business"}>
-                                    <DropdownMenuItem className='text-[20px]'>Business</DropdownMenuItem>
-                                </Link>
-                                <Link href={"/health-and-fitness"}>
-                                    <DropdownMenuItem className='text-[20px]'>Health & Fitness</DropdownMenuItem>
-                                </Link>
-                                <Link href={"/news-and-currentaffairs"}>
-                                    <DropdownMenuItem className='text-[20px]'>News and Current Affairs</DropdownMenuItem>
-                                </Link>
-                                <Link href={"/food-and-drink"}>
-                                    <DropdownMenuItem className='text-[20px]'>Food and Drink</DropdownMenuItem>
-                                </Link>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <CustomDropdown />
                     </div>
 
                     <button
@@ -152,23 +123,14 @@ const Navbar = () => {
                             {items.map((item, i) => (
                                 <li key={i} className="list-none">
                                     <Link href={item.link}>
-                                        <span className="block dark:text-white text-black hover:text-gray-400">{item.name}</span>
+                                        <span className="block dark:text-white text-[22px] text-black hover:text-gray-400">{item.name}</span>
                                     </Link>
                                 </li>
                             ))}
-                            <div className={`${bokor.className} sm:hidden block`}>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger className='flex gap-2 items-center'>Category   <span><IoIosArrowDown /></span></DropdownMenuTrigger>
-                                    <DropdownMenuContent className={`${bokor.className} border-none shadow-none`}>
-                                        <Link href={"/technology-and-innovation"}><DropdownMenuItem>Technology and Innovation</DropdownMenuItem></Link>
-                                        <Link href={"/sports"}><DropdownMenuItem>Sports</DropdownMenuItem></Link>
-                                        <Link href={"/business"}><DropdownMenuItem>Business</DropdownMenuItem></Link>
-                                        <Link href={"/health-and-fitness"}><DropdownMenuItem>Health & Fitness</DropdownMenuItem></Link>
-                                        <Link href={"/news-and-currentaffairs"}><DropdownMenuItem>News and Current Affairs</DropdownMenuItem></Link>
-                                        <Link href={"/food-and-drink"}><DropdownMenuItem>Food and Drink</DropdownMenuItem></Link>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                            <div className="sm:hidden block">
+                                <CustomDropdown />
                             </div>
+
 
                         </ul>
                     </div>

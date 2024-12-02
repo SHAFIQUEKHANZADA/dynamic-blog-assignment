@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Narrative",
+  title: "The Modern Narrative",
   description: "Discover, Reflect, Share",
 };
 

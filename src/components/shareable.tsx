@@ -1,4 +1,5 @@
-import { FaWhatsapp, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaWhatsapp, FaLinkedin, FaTwitter, FaFacebookF } from 'react-icons/fa';
 
  
 function generateShareLinks(slug: string, title: string) {
@@ -25,38 +26,38 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ slug, title }) => {
   return (
     <div className="flex space-x-4 mt-8 border-t pt-4">
       <span className="text-lg font-semibold">Share this post:</span>
-      <a
+      <Link
         href={shareLinks.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-green-500"
+        className="bg-black text-white p-2 rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaWhatsapp size={30} />
-      </a>
-      <a
+        <FaWhatsapp className="sm:text-[16px] text-[12px]" />
+      </Link>
+      <Link
         href={shareLinks.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-700"
+        className="bg-black text-white p-2   rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaLinkedin size={30} />
-      </a>
-      <a
+        <FaLinkedin className="sm:text-[16px] text-[12px]" />
+      </Link>
+      <Link
         href={shareLinks.twitter}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-400"
+        className="bg-black text-white p-2   rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaTwitter size={30} />
-      </a>
-      <a
+        <FaTwitter className="sm:text-[16px] text-[12px]" />
+      </Link>
+      <Link
         href={shareLinks.facebook}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600"
+        className="bg-black text-white p-2   rounded-full hover:bg-gray-200 dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaFacebook size={30} />
-      </a>
+        <FaFacebookF className="sm:text-[16px] text-[12px]" />
+      </Link>
     </div>
   );
 };
