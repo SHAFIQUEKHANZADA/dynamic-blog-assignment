@@ -27,7 +27,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ title }) => {
     setCurrentUrl(window.location.href);
   }, []);
 
-  if (!currentUrl) return null;  
+  if (!currentUrl) return null;
 
   const shareLinks = generateShareLinks(currentUrl, title);
 
@@ -37,35 +37,36 @@ const ShareButton: React.FC<ShareButtonProps> = ({ title }) => {
         href={shareLinks.facebook}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[12px] sm:text-[20px]"
+        className="bg-black text-white sm:p-2 p-1 rounded-full hover:bg-gray-200 dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaFacebookF />
+        <FaFacebookF className="sm:text-[16px] text-[10px]" />
       </Link>
       <Link
         href={shareLinks.twitter}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[12px] sm:text-[20px]"
+        className="bg-black text-white sm:p-2 p-1 rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaTwitter />
+        <FaTwitter className="sm:text-[16px] text-[10px]" />
       </Link>
       <Link
         href={shareLinks.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[12px] sm:text-[20px]"
+        className="bg-black text-white sm:p-2 p-1 rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaLinkedin />
+        <FaLinkedin className="sm:text-[16px] text-[10px]" />
       </Link>
       <Link
         href={shareLinks.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[12px] sm:text-[20px]"
+        className="bg-black text-white sm:p-2 p-1 rounded-full dark:bg-gray-100 dark:text-gray-800 hover:dark:bg-gray-700 hover:dark:text-gray-200 hover:bg-gray-200 hover:text-black transition-all duration-300"
       >
-        <FaWhatsapp />
+        <FaWhatsapp className="sm:text-[16px] text-[10px]" />
       </Link>
     </div>
+
   );
 };
 

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { IoIosArrowDown } from 'react-icons/io';
 import ShareButton from './shareBtn';
-import { FaSearch } from 'react-icons/fa';
+import SearchComponent from './SearchComponent';
 
 
  
@@ -47,19 +47,17 @@ const Navbar = () => {
 
         <div className='flex flex-col justify-center sm:items-center items-end relative sm:mb-4'>
             <div className="flex sm:items-start items-center justify-between w-full relative sm:px-5 px-2 sm:pb-14 sm:pt-8 pt-2">
-                {/* ShareButton on the left */}
+                
                 <div className="flex items-center">
                 <ShareButton title="Check out this amazing post!" />
                 </div>
-
-                {/* Modern Narrative in the center */}
+ 
                 <div className={`${king.className} md:text-6xl text-3xl font-bold absolute left-1/2 transform -translate-x-1/2 text-center`}>
                 The Modern Narrative
                 </div>
-
-                {/* FaSearch on the right */}
+ 
                 <div className="flex items-center">
-                    <FaSearch />
+                   <SearchComponent/>
                 </div>
             </div>
 
@@ -78,7 +76,7 @@ const Navbar = () => {
 
                     <div className='sm:flex hidden'>
                         <DropdownMenu>
-                            <DropdownMenuTrigger className='flex gap-2 items-center'>
+                            <DropdownMenuTrigger className='flex gap-2 items-center outline-none'>
                                 Category <span><IoIosArrowDown /></span>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className={`${bokor.className} p-4 mr-3 mt-[14px] rounded-sm`}>
